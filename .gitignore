@@ -1,0 +1,7 @@
+/build
+/HttpReqTest/build
+/MalParser/test
+/MalParser/log
+/log
+\.DS_Store
+*.pyc
