@@ -222,7 +222,7 @@ void sigHandler(int sig)
 void signalMessage(const char* msg)
 {
   clog::error(msg);
-  Connection::perform_telegram_request(Bot::sendMessageUrl,{ {"chat_id",std::to_string(-1001109568886)}, {"text", msg} });
+  Connection::perform_telegram_request(Bot::sendMessageUrl,{ {"chat_id",std::to_string(0000)}, {"text", msg} });
 }
 
 int main(int argv, char *argc[])
