@@ -2,8 +2,8 @@ CC = g++
 SRC_PATH = src
 BUILD_PATH = build
 CFLAGS = -std=c++11 -g -rdynamic
-INCLUDE = -I/usr/local/include/mongocxx/v_noabi -I/usr/local/include/libmongoc-1.0 -I/usr/local/include/bsoncxx/v_noabi -I/usr/local/include/libbson-1.0
-LIBS = -Ilib -pthread -static-libgcc -static-libstdc++ -L/usr/local/lib -l:libmongocxx.a -l:libbsoncxx.a -l:libmongoc-1.0.a -l:libbson-1.0.a -lrt -lssl -lcrypto -lsasl2
+INCLUDE = -I/usr/include/mongocxx/v_noabi -I/usr/include/libmongoc-1.0 -I/usr/include/bsoncxx/v_noabi -I/usr/include/libbson-1.0
+LIBS = -Ilib -pthread -static-libgcc -static-libstdc++ -L/usr/lib -lmongocxx -lbsoncxx -lrt -lssl -lcrypto
 FILES = Defines.h Helper.h Helper.cpp Log.h Log.cpp Bot/Update.h Bot/Update.cpp Bot/Stats.h Bot/Stats.cpp DatabaseManager.h DatabaseManager.cpp Bot/TelegramBot.h Bot/TelegramBot.cpp Bot/AnimeResultParse.h Bot/AnimeResultParse.cpp Bot/Connection.h Bot/Connection.cpp Bot/RateLimiter.h Bot/RateLimiter.cpp DataMap.h DataMap.cpp ExecutionTimer.h ExecutionTimer.cpp Source.cpp
 SOURCES = $(FILES:%=$(SRC_PATH)/%)
 NAME = nanaoBot

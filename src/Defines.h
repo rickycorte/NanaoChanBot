@@ -38,7 +38,7 @@ namespace Bot
   const char *const Telegram_Host = "api.telegram.org";
   const char *const Telegram_Base_Path = "/bot token";
 
-  const char *const webHookPort = "9799";
+  const char *const webHookPort = "1997";
   const short maxConnections = 1;
   const long socketTimeOutSec = 2;
   const long socketTimeOutMilliSec = 0;

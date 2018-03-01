@@ -23,6 +23,9 @@
 #include "DatabaseManager.h"
 #include "Log.h"
 
+#include <bsoncxx/builder/stream/document.hpp>
+
+
 using bsoncxx::builder::stream::close_array;
 using bsoncxx::builder::stream::close_document;
 using bsoncxx::builder::stream::document;
@@ -35,7 +38,7 @@ DatabaseManager::DatabaseManager()
 {
   isRunning = false;
   clog::log("Connecting to database");
-  client = new mongocxx::client({"mongo credentials"});
+  client = new mongocxx::client({"mongodb://test:password@localhost:27017"});
   if(!client)
   {
     clog::error("Unable to create database connection");
