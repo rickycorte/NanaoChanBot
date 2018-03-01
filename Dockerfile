@@ -37,4 +37,4 @@ RUN make
 
 EXPOSE 1997
 
-RUN cd build && ./nanaoBot
+CMD ["cd build && ./nanaoBot"]
