@@ -37,4 +37,5 @@ RUN make
 
 EXPOSE 1997
 
-CMD ["cd build && ./nanaoBot"]
+WORKDIR /nanao/build
+CMD ["./nanaoBot"]
