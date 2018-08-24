@@ -32,11 +32,11 @@ namespace Bot
 
   const char *const TelegramName = "@NanaoChanBot";
   const char *const TelegramNameLower = "@nanaochanbot";
-  const char *const TelegramToken = "bot token";
+  const char *const TelegramToken = "<url>";
 
   const char *const HTTP_Get_Template = "GET {path} HTTP/1.1\nHost: {host}\nAccept-Language: en-us\nUser-agent: nanao\nConnection: keep-alive\n\n";
   const char *const Telegram_Host = "api.telegram.org";
-  const char *const Telegram_Base_Path = "/bot token";
+  const char *const Telegram_Base_Path = "/bot<rest>";
 
   const char *const webHookPort = "9799";
   const short maxConnections = 1;

@@ -48,8 +48,6 @@ TelegramBot::TelegramBot(): closeThreads{false}
   pictures = new DataMap("Data/photos.txt");
   clog::log("pictures: OK");
 
-  database = new DatabaseManager();
-
   //avvia tutti i thread
   clog::log("Starting workes");
   for(int i =0; i < Bot::maxConcurrentRequestHandlerThreads;i++)
@@ -69,7 +67,6 @@ TelegramBot::TelegramBot(): closeThreads{false}
 
 TelegramBot::~TelegramBot()
 {
-  delete database;
   delete PreferencesIT;
   delete pictures;
   delete languageIT;
@@ -424,7 +421,7 @@ void TelegramBot::SearchHandlerInMessage(Update *up,int tid)
 
   if(up->hasWord({"scusa","scusami","perdono","perdonami","sorry","dispiace"}))
   {
-    HandleGenericMessageLib(up,"scusa","Sorry reply",tid,responceType::Message);
+    HandleGenericMessageLib(up,"scusa","Sorry reply",tid,responceType::Message, true);
     return;
   }
 
@@ -453,12 +450,45 @@ void TelegramBot::SearchHandlerInMessage(Update *up,int tid)
     return;
   }
 
+    if(up->hasWord({"come"}) && up->hasWord({"va"}) )
+    {
+      HandleGenericMessageLib(up,"come_va","come_va reply",tid,responceType::Message);
+      return;
+    }
+
+    if(up->hasWord({"felice","contento", "soddisfatto", "orgoglioso","allegro", "sorpreso", "innamorato"
+    "contenta", "soddisfatta", "orgogliosa","allegra", "sorpresa", "innamorata"}))
+    {
+      HandleGenericMessageLib(up,"felice","felice reply",tid,responceType::Message, true);
+      return;
+    }
+
+    if(up->hasWord({"arrabiato","incazzato","disgustato","sospettoso","pigro",
+      "arrabiata","incazzata","disgustata","sospettosa","pigra",
+      "triste","insicuro","debole","ansioso","geloso","insicura","ansiosa","gelosa", "triste", "schifo"}))
+    {
+      HandleGenericMessageLib(up,"sad","sad reply",tid,responceType::Message, true);
+      return;
+    }
+
+    if(up->hasWord({"solo","abbandonato","single","sola","abbandonata"}))
+    {
+      HandleGenericMessageLib(up,"alone","alone reply",tid,responceType::Message, true);
+      return;
+    }
+
+    if(up->hasWord({"perche", "perche'", "perché", "why","kho","cos"}))
+    {
+      HandleGenericMessageLib(up,"why","why reply",tid,responceType::Message, true);
+      return;
+    }
+
   if(up->hasWord({"vers"}))
   {
     std::string s = Bot::ProgramName;
     s+= ":\nVersion: ";
     s+= Bot::ProgramVersion;
-    s+= "\nDeveloper: @me";
+    s+= "\nDeveloper: @xDevily";
     up->SendMessage(s);
     return;
   }
@@ -471,7 +501,8 @@ void TelegramBot::SearchHandlerInMessage(Update *up,int tid)
   }
 
   clog::log(tid,"Message trigger no found");
-  up->SendReply(NoCommandFoundMessageIT);
+  if(up->isPrivateChat())
+    up->SendReply(NoCommandFoundMessageIT);
 }
 
 
@@ -575,57 +606,8 @@ void TelegramBot::HandleAnimeSearchMessage(Update *up, int tid, bool recursive)
     clog::error(tid,"Null update recived");
     return;
   }
-
-  std::string name = up->getWordsAfterIndex( up->getTriggerMatchResult()->getIndex() );
-
-  //nessun titolo
-  if(name == "")
-  {
-    up->SendReply(NoAnimeParamterIT);
-    clog::log(tid,"No anime name, aborting");
-    return;
-  }
-
-  //log name
-  std::string lg = {name};
-  lg = "Anime title found: "+lg;
-  clog::log(lg);
-
-  //cerca il titolo nel database
-  std::string queryRes = database->GetAnimeInfos(name);
-
-  //ci sono stati problemi nel connetersi al database
-  if(queryRes == "error")
-  {
-    clog::error("Database connection error!");
-    up->SendReply(AnimeDatabaseErrorIT);
-    return;
-  }
-
-  //rispondi in base al risultato della query
-  //nessun anime trovato allora cerca su mal
-  if(queryRes == "null")
-  {
-    //invoca il parser
-    lg = "python MalParser/parser.py -n \""+ name +"\"";
-    int res = system(lg.c_str());
-    //ha trovato qualche anime
-    if(res == 0)
-      {
-        //rielabora la richiesta
-        if(!recursive)
-          HandleAnimeSearchMessage(up,tid,true);
-        else
-          up->SendReply(Helper::StrReplace(AnimeNotInDBIT, "{a}", name));
-      }
-
-    else
-      up->SendReply(Helper::StrReplace(FakeAnimeIT, "{a}", name));
-  }
-  else
-  {
-    up->SendReply(AnimeResultParse::getAnimeResponceFromJson(queryRes) );
-  }
+ 
+  up->SendReply("Sono impegnata a fare altro baaaka!");
 
   clog::log(tid,"Handle anime info request");
 }

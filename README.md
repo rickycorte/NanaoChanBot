@@ -19,14 +19,12 @@ A Telegram chat bot
 ## Third parties
 * OpenSSL: https://www.openssl.org/
 * RapidJSON: https://github.com/Tencent/rapidjson
-* Mongodb
-* Mongodb C++ driver: http://mongodb.github.io/mongo-cxx-driver/
 
 ## Requirements
 * Linux distros (tested on Ubuntu 16.04 lts)
 * Reverse proxy for incoming connections (example: nginx)
 
 ## Compile
-Install Mongodb c++ driver and then run
+Run
 
 ```make```

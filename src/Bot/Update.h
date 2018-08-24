@@ -61,7 +61,7 @@ public:
 
 
   //controlla che questo update provenga da me
-  bool isFromDeveloper() const { return getSenderUsername() == "username"; }
+  bool isFromDeveloper() const { return getSenderUsername() == "xdevily"; }
 
   //true se e' un messaggio contenente unicamente il nome del bot
   bool isMessageName() const

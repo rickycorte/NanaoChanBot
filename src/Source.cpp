@@ -31,7 +31,6 @@
 #include <string>
 #include <thread>
 #include <climits>
-#include <mongocxx/instance.hpp>
 
 //stacktrace
 #include <execinfo.h>
@@ -236,11 +235,6 @@ int main(int argv, char *argc[])
   signal(SIGTERM, sigHandler);
 
   clog::PrintHeader();
-
-  //crea connessione a mongodb
-  clog::log("Creating mongocxx instance");
-  auto instance =  mongocxx::instance();
-  clog::log("Done");
 
   //one time allocation del buffer
   clog::log("Allocating socket buffer");

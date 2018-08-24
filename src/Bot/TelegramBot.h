@@ -30,7 +30,6 @@
 
 #include "Update.h"
 #include "../Helper.h"
-#include "../DatabaseManager.h"
 #include "../DataMap.h"
 #include "Stats.h"
 
@@ -129,9 +128,6 @@ private:
   * Data
   *********************************************************************/
 
-  //manager database
-  DatabaseManager *database;
-
   //mappe di risposte e dati
   DataMap *PreferencesIT;
 
@@ -154,7 +150,7 @@ private:
 
   const char *const AnimeNotInDBIT = "Mi spiace, ma non sono riuscita a trovare nulla"; //{a} per titolo anime
   const char *const FakeAnimeIT = "Stupido baka quello non e' un anime!"; //{a} per titolo anime
-  const char *const WhatCanIDoIT = "Fammi pensare... non me lo ricordo piu'! Anzi aspetta ho scritto tutto qui: https://rickycorte.github.io/nanao/";
+  const char *const WhatCanIDoIT = "Fammi pensare... non me lo ricordo baaaaka!";
 
 
   const char *const SkynetEasterEggP1IT = "Stavate parlando di me?";
