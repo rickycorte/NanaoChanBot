@@ -18,35 +18,21 @@
  *
  */
 
-#include <iostream>
+#ifndef HIKARIBACKEND_HIKARICONFIG_H
+#define HIKARIBACKEND_HIKARICONFIG_H
 
-#include <rickycorte/Logging.hpp>
+#define HIKARI_VERSION_MAJOR 0
+#define HIKARI_VERSION_MINOR 1
+#define HIKARI_VERSION_PATCH 0
 
-#include "global/GlobalStaticConfig.hpp"
-#include "Server.hpp"
-#include "EchoApi.hpp"
+#define HEADER_DISPLAY_NAME "Hikari Backend"
 
+#define DEFAULT_SERVER_PORT 8080
+#define EPOLL_MAX_EVENTS 64
+#define MAX_CONNECTIONS 5
+#define READ_BUFFER_SIZE 256
 
-void printStartHeader()
-{
-    std::cout << HEADER_DISPLAY_NAME << std::endl << " Release "
-        << HIKARI_VERSION_MAJOR << "."
-        << HIKARI_VERSION_MINOR << "."
-        << HIKARI_VERSION_PATCH
-        << std::endl << std::endl;
-}
+/* 2kbytes per request is a really huge limit! */
+#define MAX_HTTP_REQUEST_SIZE 16384
 
-int main()
-{
-    using namespace RickyCorte;
-
-    printStartHeader();
-
-
-    Server server;
-    server.AddApiInterface("/", new EchoApi());
-    server.Run();
-
-
-    return 0;
-}
+#endif //HIKARIBACKEND_HIKARICONFIG_H

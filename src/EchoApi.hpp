@@ -18,35 +18,32 @@
  *
  */
 
-#include <iostream>
+#ifndef HIKARIBACKEND_ECHOAPI_HPP
+#define HIKARIBACKEND_ECHOAPI_HPP
 
-#include <rickycorte/Logging.hpp>
+#include "http/ApiInterface.hpp"
 
-#include "global/GlobalStaticConfig.hpp"
-#include "Server.hpp"
-#include "EchoApi.hpp"
-
-
-void printStartHeader()
+namespace RickyCorte
 {
-    std::cout << HEADER_DISPLAY_NAME << std::endl << " Release "
-        << HIKARI_VERSION_MAJOR << "."
-        << HIKARI_VERSION_MINOR << "."
-        << HIKARI_VERSION_PATCH
-        << std::endl << std::endl;
+
+    class EchoApi : public Http::ApiInterface
+    {
+    public:
+
+        Http::Reply onGET(const Http::Request &req) override
+        {
+
+            std::string headers = std::to_string((int)req.GetType()) + " at " + req.GetPath() + "\nYour Headers:\n";
+            for (auto itr = req.GetHeaderOptions().begin(); itr != req.GetHeaderOptions().end(); itr++)
+            {
+                headers += "\t" + itr->first + " -> " + itr->second + "\n";
+            }
+
+            return Http::Reply(200, headers + "Your body:\n!BEGIN!\n" + req.GetBody() + "\n!END!");
+        }
+
+    };
 }
 
-int main()
-{
-    using namespace RickyCorte;
 
-    printStartHeader();
-
-
-    Server server;
-    server.AddApiInterface("/", new EchoApi());
-    server.Run();
-
-
-    return 0;
-}
+#endif //HIKARIBACKEND_ECHOAPI_HPP
