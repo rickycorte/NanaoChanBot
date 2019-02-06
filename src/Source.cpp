@@ -19,6 +19,7 @@
  */
 
 #include <iostream>
+#include <cstring>
 
 #include <rickycorte/Logging.hpp>
 
@@ -26,27 +27,57 @@
 #include "Server.hpp"
 #include "EchoApi.hpp"
 
+#include "traier/MLTrainer.hpp"
 
-void printStartHeader()
+
+void printHelp()
 {
-    std::cout << HEADER_DISPLAY_NAME << std::endl << " Release "
-        << HIKARI_VERSION_MAJOR << "."
-        << HIKARI_VERSION_MINOR << "."
-        << HIKARI_VERSION_PATCH
-        << std::endl << std::endl;
+    std::cout<<"NanaoChanBot usage:\n"
+               "Run without parameters to start bot\n\t"
+               "'-t' to train model\n\t"
+               "'-h' to show this menu\n";
 }
 
-int main()
+void trainDataset()
+{
+    MLTrainer trainer;
+    trainer.Train();
+}
+
+
+void startBot()
 {
     using namespace RickyCorte;
-
-    printStartHeader();
 
 
     Server server;
     server.AddApiInterface("/", new EchoApi());
     server.Run();
+}
 
+
+int main(int argc, char *argv[])
+{
+    if(argc == 1) // solo nome programma
+    {
+        startBot();
+        return  0;
+    }
+    else if(argc == 2) //cerca -h e -t
+    {
+        if(strcmp(argv[1], "-h") == 0)
+        {
+            printHelp();
+            return 0;
+        }
+        if(strcmp(argv[1], "-t") == 0)
+        {
+            trainDataset();
+            return  0;
+        }
+    }
+
+    std::cout<<"Type NanaoChanBot '-h' to show help\n";
 
     return 0;
 }

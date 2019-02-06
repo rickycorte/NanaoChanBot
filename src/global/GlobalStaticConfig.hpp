@@ -21,16 +21,13 @@
 #ifndef HIKARIBACKEND_HIKARICONFIG_H
 #define HIKARIBACKEND_HIKARICONFIG_H
 
-#define HIKARI_VERSION_MAJOR 0
-#define HIKARI_VERSION_MINOR 1
-#define HIKARI_VERSION_PATCH 0
-
-#define HEADER_DISPLAY_NAME "Hikari Backend"
-
 #define DEFAULT_SERVER_PORT 8080
 #define EPOLL_MAX_EVENTS 64
 #define MAX_CONNECTIONS 5
 #define READ_BUFFER_SIZE 256
+
+#define ML_INPUT_FILE "data/dataset.json"
+#define ML_MODEL_FILE "data/model.dat"
 
 /* 2kbytes per request is a really huge limit! */
 #define MAX_HTTP_REQUEST_SIZE 16384

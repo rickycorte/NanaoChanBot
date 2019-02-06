@@ -1,0 +1,6 @@
+[submodule "lib/mitie"]
+	path = lib/mitie
+	url = https://github.com/mit-nlp/MITIE.git
+[submodule "lib/json"]
+	path = lib/json
+	url = https://github.com/nlohmann/json.git
