@@ -26,6 +26,7 @@
 #include "global/GlobalStaticConfig.hpp"
 #include "Server.hpp"
 #include "EchoApi.hpp"
+#include "telegram/TelegramBotApi.hpp"
 
 #include "traier/MLTrainer.hpp"
 
@@ -52,6 +53,7 @@ void startBot()
 
     Server server;
     server.AddApiInterface("/", new EchoApi());
+    server.AddApiInterface("/tgdev", new TelegramBotApi());
     server.Run();
 }
 

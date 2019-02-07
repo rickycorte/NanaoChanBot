@@ -1,0 +1,16 @@
+{
+  "train_data": [
+    {
+      "tag": "test",
+      "phrases": ["A","B","C"]
+    },
+    {
+      "tag": "shish",
+      "phrases": ["A","B","C"]
+    },
+    {
+      "tag": "kebab",
+      "phrases": ["A","B","C"]
+    }
+  ]
+}

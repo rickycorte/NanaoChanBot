@@ -26,8 +26,9 @@
 #define MAX_CONNECTIONS 5
 #define READ_BUFFER_SIZE 256
 
-#define ML_INPUT_FILE "data/dataset.json"
-#define ML_MODEL_FILE "data/model.dat"
+#define ML_INPUT_FILE "resources/dataset.json"
+#define ML_MODEL_FILE "resources/model.dat"
+#define TG_REPLY_FILE "resources/telgram.json"
 
 /* 2kbytes per request is a really huge limit! */
 #define MAX_HTTP_REQUEST_SIZE 16384
