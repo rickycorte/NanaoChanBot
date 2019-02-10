@@ -5,7 +5,7 @@
 #include <mitie/text_categorizer.h>
 
 #include "http/ApiInterface.hpp"
-#include "GlobalStaticConfig.hpp"
+#include "common/GlobalStaticConfig.hpp"
 #include "common/ReplyContainer.hpp"
 
 namespace RickyCorte::Telegram

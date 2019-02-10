@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <nlohmann/json.hpp>
 
 namespace Utility
 {
@@ -68,6 +69,31 @@ namespace Utility
     inline const char * const bool_to_string(bool b)
     {
         return b ? "true" : "false";
+    }
+
+
+    /* Json utility */
+
+    /**
+     * Recupera il valore di un json dalla path MA non tirare nessuna eccezione
+     * @tparam T
+     * @param j
+     * @param path
+     * @param default_value
+     * @return
+     */
+    template <class T>
+    T from_json_nothrow(const nlohmann::json& j, const std::string& path, T default_value)
+    {
+        try
+        {
+          return j.at(path).get<T>();
+        }
+        catch (...)
+        {
+            return default_value;
+        }
+
     }
 
 }

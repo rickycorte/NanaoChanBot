@@ -11,7 +11,6 @@ include_directories(lib/mitie/dlib)
 include_directories(lib/mitie/mitielib/include)
 include_directories(lib/json/include)
 include_directories(src)
-include_directories(src/global)
 include_directories(src/http)
 
 
@@ -28,7 +27,7 @@ DEPENDS ${CMAKE_SOURCE_DIR}/lib/mitie/mitielib/libmitie.a
 
 add_executable(NanaoChanBot
         lib/logging/rickycorte/Logging.hpp
-        src/global/GlobalStaticConfig.hpp
+        src/common/GlobalStaticConfig.hpp
         src/http/ApiInterface.hpp
         src/http/Reply.cpp
         src/http/Reply.hpp
@@ -41,7 +40,7 @@ add_executable(NanaoChanBot
         src/Source.cpp
         CMakeLists.txt
         LICENSE
-        README.md src/traier/MLTrainer.cpp src/traier/MLTrainer.hpp src/global/Utility.h src/telegram/BotApi.cpp src/telegram/BotApi.hpp src/common/ReplyContainer.cpp src/common/ReplyContainer.hpp)
+        README.md src/traier/MLTrainer.cpp src/traier/MLTrainer.hpp src/common/Utility.h src/telegram/BotApi.cpp src/telegram/BotApi.hpp src/common/ReplyContainer.cpp src/common/ReplyContainer.hpp src/telegram/Update.cpp src/telegram/Update.hpp)
 
 target_link_libraries(NanaoChanBot pthread ${CMAKE_SOURCE_DIR}/lib/mitie/mitielib/libmitie.a)
 add_dependencies(NanaoChanBot mitielib)

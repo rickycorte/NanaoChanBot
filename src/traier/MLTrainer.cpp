@@ -7,7 +7,7 @@
 #include <mitie/text_categorizer_trainer.h>
 #include <Logging.hpp>
 
-#include "Utility.h"
+#include "src/common/Utility.h"
 
 void MLTrainer::Train()
 {

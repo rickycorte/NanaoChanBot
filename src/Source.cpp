@@ -23,7 +23,7 @@
 
 #include <rickycorte/Logging.hpp>
 
-#include "global/GlobalStaticConfig.hpp"
+#include "common/GlobalStaticConfig.hpp"
 #include "Server.hpp"
 #include "EchoApi.hpp"
 #include "telegram/BotApi.hpp"

@@ -6,7 +6,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 
-#include "GlobalStaticConfig.hpp"
+#include "src/common/GlobalStaticConfig.hpp"
 
 /**
  * Classe helper per trainare il modello di text categorizer

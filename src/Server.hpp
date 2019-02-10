@@ -21,7 +21,7 @@
 #ifndef HIKARIBACKEND_SERVER_HPP
 #define HIKARIBACKEND_SERVER_HPP
 
-#include "GlobalStaticConfig.hpp"
+#include "common/GlobalStaticConfig.hpp"
 
 #include <map>
 #include <string>
