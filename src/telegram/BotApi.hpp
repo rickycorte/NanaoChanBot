@@ -1,5 +1,4 @@
 
-
 #ifndef NANAOCHANBOT_TELEGRAMBOTAPI_HPP
 #define NANAOCHANBOT_TELEGRAMBOTAPI_HPP
 
@@ -7,23 +6,25 @@
 
 #include "http/ApiInterface.hpp"
 #include "GlobalStaticConfig.hpp"
-#include "ReplyContainer.hpp"
+#include "common/ReplyContainer.hpp"
 
-namespace RickyCorte
+namespace RickyCorte::Telegram
 {
 
-    class TelegramBotApi : public Http::ApiInterface
+    class BotApi : public Http::ApiInterface
     {
     public:
-        TelegramBotApi();
-        ~TelegramBotApi();
+        BotApi();
+        ~BotApi();
 
         Http::Reply onPOST(const Http::Request &req) override;
+
+    private:
+        mitie::text_categorizer categorizer;
+        ReplyContainer* reply_container;
     };
 
 
-    mitie::text_categorizer categorizer;
-    ReplyContainer* reply_container;
 }
 
 

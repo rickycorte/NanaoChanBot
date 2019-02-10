@@ -1,11 +1,10 @@
-
-#include "TelegramBotApi.hpp"
+#include "BotApi.hpp"
 
 #include <Logging.hpp>
 
 #include "Utility.h"
 
-RickyCorte::TelegramBotApi::TelegramBotApi()
+RickyCorte::Telegram::BotApi::BotApi()
 {
 
     reply_container = new ReplyContainer{TG_REPLY_FILE};
@@ -29,12 +28,12 @@ RickyCorte::TelegramBotApi::TelegramBotApi()
     }
 }
 
-RickyCorte::Http::Reply RickyCorte::TelegramBotApi::onPOST(const RickyCorte::Http::Request &req)
+RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::Http::Request &req)
 {
     return ApiInterface::onPOST(req);
 }
 
-RickyCorte::TelegramBotApi::~TelegramBotApi()
+RickyCorte::Telegram::BotApi::~BotApi()
 {
     if(reply_container != nullptr) delete reply_container;
 }
