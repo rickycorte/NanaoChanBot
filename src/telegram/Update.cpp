@@ -2,6 +2,7 @@
 #include "Update.hpp"
 #include <nlohmann/json.hpp>
 #include <regex>
+#include <logging/rickycorte/Logging.hpp>
 
 #include "common/GlobalStaticConfig.hpp"
 #include "common/Utility.h"
@@ -17,10 +18,10 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
         using namespace Utility;
         message = from_json_nothrow<std::string>(json, "message/text","");
         toLower(message);
-        chat_id = json["message/chat/id"_json_pointer];
-        message_type = json["message/chat/type"_json_pointer];
-        message_id = json["message/message_id"_json_pointer];
-        sender_name = json["message/from/first_name"_json_pointer];
+        chat_id = json["/message/chat/id"_json_pointer];
+        message_type = json["/message/chat/type"_json_pointer];
+        message_id = json["/message/message_id"_json_pointer];
+        sender_name = json["/message/from/first_name"_json_pointer];
         sender_username = from_json_nothrow<std::string>(json, "message/from/username", "");
 
         std::string reply_sender =  from_json_nothrow<std::string>(json,"message/reply_to_message/from/username", "");
@@ -32,8 +33,9 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
         has_bot_name = std::regex_search(message,std::regex(TG_RGX_BOT_NAME));
         has_bot_name = std::regex_match(message, std::regex(TG_RGX_BOT_NAME)); //match completo
     }
-    catch(...)
+    catch(std::exception& e)
     {
+        RC_ERROR("Invalid telegram request: ", e.what());
         is_valid = false;
     }
 }

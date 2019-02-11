@@ -65,7 +65,13 @@ RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::H
             else if (up->isPrivateChat() || up->isReply() || up->containsBotName())
             {
                 //ml
-                categorizer.predict(Utility::split_every(up->getMessage()), text_tag, text_score);
+                RC_DEBUG("ML: "+ up->getMessage());
+
+                if(up->getMessage().size() < 1)
+                    text_tag = TG_LOWSCORE_TAG;
+                else
+                    categorizer.predict(Utility::split_every(up->getMessage()), text_tag, text_score);
+
                 is_reply = !(rd() % 4);
             }
 
