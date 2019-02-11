@@ -16,22 +16,29 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
         nlohmann::json json = nlohmann::json::parse(data);
 
         using namespace Utility;
-        message = from_json_nothrow<std::string>(json, "message/text","");
+        message = from_json_nothrow<std::string>(json, "/message/text","");
         toLower(message);
         chat_id = json["/message/chat/id"_json_pointer];
         message_type = json["/message/chat/type"_json_pointer];
         message_id = json["/message/message_id"_json_pointer];
         sender_name = json["/message/from/first_name"_json_pointer];
-        sender_username = from_json_nothrow<std::string>(json, "message/from/username", "");
+        sender_username = from_json_nothrow<std::string>(json, "/message/from/username", "");
 
-        std::string reply_sender =  from_json_nothrow<std::string>(json,"message/reply_to_message/from/username", "");
+        std::string reply_sender =  from_json_nothrow<std::string>(json,"/message/reply_to_message/from/username", "");
         is_reply = reply_sender == TG_BOT_NAME;
 
-        group_member_join = from_json_nothrow(json,"message/new_chat_member",false);
-        group_member_quit = from_json_nothrow(json,"message/left_chat_member",false);
+        group_member_join = from_json_nothrow(json,"/message/new_chat_member",false);
+        group_member_quit = from_json_nothrow(json,"/message/left_chat_member",false);
 
-        has_bot_name = std::regex_search(message,std::regex(TG_RGX_BOT_NAME));
-        has_bot_name = std::regex_match(message, std::regex(TG_RGX_BOT_NAME)); //match completo
+        std::regex rgx = std::regex(TG_RGX_BOT_NAME);
+        if(std::regex_search(message, rgx))
+        {
+            has_bot_name = true;
+            message = std::regex_replace(message, rgx, "");
+            trim(message);
+            isInvoke = message.size() <= 0;
+        }
+
     }
     catch(std::exception& e)
     {
@@ -105,8 +112,8 @@ std::string RickyCorte::Telegram::Update::makeTextReply(const std::string reply,
     nlohmann::json j;
     j["method"] = "sendMessage";
     j["chat_id"] = chat_id;
-    j["text"] = message;
-    if(is_reply)
+    j["text"] = reply;
+    if(as_reply)
         j["reply_to_message_id"] = message_id;
 
     return j.dump();
