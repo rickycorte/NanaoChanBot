@@ -1,16 +1,159 @@
 {
   "replies": [
     {
-      "tag": "test",
-      "phrases": ["A","B","C"]
+      "tag": "ev_invoke",
+      "phrases": [
+        "Shh, sto guardando un anime",
+        "Nya?",
+        "Si sono io"
+      ]
     },
     {
-      "tag": "shish",
-      "phrases": ["A","B","C"]
+      "tag": "ev_join",
+      "phrases": [
+        "Nyaaaaa",
+        "Heyyyy",
+        "Ciaoooo"
+      ]
     },
     {
-      "tag": "kebab",
-      "phrases": ["A","B","C"]
+      "tag": "ev_left",
+      "phrases": [
+        "Addio",
+        "(╥﹏╥)",
+        "Rip †",
+        "Ci mancherai, o forse no?"
+      ]
+    },
+    {
+      "tag": "ev_long",
+      "phrases": [
+        "Scrivere meno no eh?",
+        "Sono stanca, magari leggo nell'anno del mai",
+        "Non ho voglia di leggere",
+        "...",
+        "Riassunto?"
+      ]
+    },
+    {
+      "tag": "ev_lowscore",
+      "phrases": [
+        "Non ho capito baka",
+        "Non riesco a seguirti :3",
+        "Kho"
+      ]
+    },
+    {
+      "tag": "aiuto",
+      "phrases": [
+        "Pagahh!",
+        "{u} come posso aiutarti?",
+        "Dimmi",
+        "{u} qual'e' il problema?"
+      ]
+    },
+    {
+      "tag": "insulto_leggero",
+      "phrases": [
+        "*ignora {u}*",
+        "*morde {u}*",
+        "{u} sei cattivo!",
+        "*linguaccia*",
+        "Baka!",
+        "Non ti permettere di dire queste cose",
+        "Sei cattivo!",
+        "Muori :3"
+      ]
+    },
+    {
+      "tag": "complimento",
+      "phrases": [
+        "Grazie :3",
+        "Lo sapevo gia'",
+        "E non mi dai un premio?",
+        "{u} la prossima volta dimmi qualcosa che non so",
+        ":3",
+        "Arigato!"
+      ]
+    },
+    {
+      "tag": "saluto",
+      "phrases": [
+        "Ciao!",
+        "Ciao {u}!",
+        "Hey {u}!",
+        "Hey!",
+        "Ciauuuuu <3",
+        "Ciauuuuu {u} <3",
+        "Nya",
+        "Nyaaaaa",
+        "*saluta {u}*",
+        "Yay!"
+      ]
+    },
+    {
+      "tag": "insulto_grave",
+      "phrases": [
+        "{u} sei uno stupido baka",
+        "{u} vai a guardare Boku No Pico!",
+        "{u} baka baka baka!",
+        "*sussurra cose cattive a {u}*",
+        "{u} se tu fossi Eren, Mikasa avrebbe buttato la sciarpa rossa",
+        "{u} sei cosi debole che Mr. Satan ti ucciderebbe con una carezza",
+        "{u} hentai hentai hentai!",
+        "{u} fai talmente pena che neanche un gigante o un ghoul ti mangerebbe",
+        "{u} sei come il cibo per i ghoul",
+        "{u} la tua pancia e' come l'universo, in costante espansione",
+        "Baka, Aho, {u}!",
+        "*morde {u}*",
+        "*fa una linguaccia a {u}*",
+        "{u} torna quando sarai un protagonista",
+        "{u} torna quando non sarai un piu' un personaggio sacrificabile"
+      ]
+    },
+    {
+      "tag": "grazie",
+      "phrases": [
+        "Di niente",
+        "{u} fammi sapere se posso esserti utile in qualcos'altro",
+        "L'ho fatto solo perche' sono troppo gentile baka",
+        "Tutta qui la mia ricompensa? :3",
+        "Sono 30 miliardi di euro, grazie"
+      ]
+    },
+    {
+      "tag": "scusa",
+      "phrases": [
+        "Forse ti perdono baka!",
+        "Baka!",
+        "Ok, la prossima volta pero' ti uccido",
+        "*ignora {u}*"
+      ]
+    },
+    {
+      "tag": "where",
+      "phrases": [
+        "Io vivo nel cloud in una comoda casa senza finestre",
+        "Nel cloud!",
+        "Forse qui, forse la, ma nessuno lo sa",
+        "Bho"
+      ]
+    },
+    {
+      "tag": "who",
+      "phrases": [
+        "Sono la tipica ragazza che adora anime, computer e non esiste",
+        "In un altro mondo mi chiamano Megumin",
+        "La tua dea",
+        "EXPLOSIOOOOONNNNNNNN"
+      ]
+    },
+    {
+      "tag": "parolacce",
+      "phrases": [
+        "Non parlo con un aho volgare come te",
+        "Smetti di dire queste cose baka"
+      ]
     }
   ]
 }

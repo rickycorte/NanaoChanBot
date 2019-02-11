@@ -43,6 +43,10 @@ std::string RickyCorte::ReplyContainer::readFromFile(const std::string &file_nam
         buffer << is.rdbuf();
         return buffer.str();
     }
+    else
+    {
+        RC_CRITICAL("Unable to open file: ", file_name);
+    }
 
     return "";
 }
@@ -53,9 +57,9 @@ void RickyCorte::ReplyContainer::parseData(const std::string &data)
 
     try
     {
-        nlohmann::json  json;
-        json.parse(data);
+        nlohmann::json json = nlohmann::json::parse(data);
         json = json["replies"];
+        //RC_DEBUG(json.dump());
 
         //parsa i singoli blocchi per trovare le frasi da usare come risposte
         for (auto it = json.begin(); it != json.end(); ++it)
@@ -66,12 +70,13 @@ void RickyCorte::ReplyContainer::parseData(const std::string &data)
                 std::string phrase = *iit;
                 std::string tag = (*it)["tag"];
                 reply_container[tag].push_back(phrase);
+                //RC_DEBUG("Found '", phrase, "' for tag: ",tag);
             }
         }
 
-    } catch (...)
+    } catch (std::exception& e)
     {
-        RC_CRITICAL("Something went wrong loading replies! Check the input file");
+        RC_CRITICAL("Something went wrong loading replies: ", e.what());
         return;
     }
 

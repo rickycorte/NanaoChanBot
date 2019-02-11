@@ -2,6 +2,8 @@
 #ifndef NANAOCHANBOT_TELEGRAMBOTAPI_HPP
 #define NANAOCHANBOT_TELEGRAMBOTAPI_HPP
 
+#include <random>
+
 #include <mitie/text_categorizer.h>
 
 #include "http/ApiInterface.hpp"
@@ -22,6 +24,8 @@ namespace RickyCorte::Telegram
     private:
         mitie::text_categorizer categorizer;
         ReplyContainer* reply_container;
+
+        std::random_device rd;
     };
 
 

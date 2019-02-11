@@ -47,6 +47,12 @@ namespace RickyCorte::Telegram
         bool isInvokeMessage() const;
 
         /**
+         * Messaggio che contiene il nome del bot
+         * @return
+         */
+        bool containsBotName() const;
+
+        /**
          * Resituisce se e' entrato una persona nel gruppo (bot compreso)
          * @return
          */
@@ -153,7 +159,7 @@ namespace RickyCorte::Telegram
         // messaggio valdo?
         bool is_valid;
 
-        bool isInvoke;
+        bool isInvoke, has_bot_name;
 
     };
 }

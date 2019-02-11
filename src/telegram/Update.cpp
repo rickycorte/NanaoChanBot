@@ -8,7 +8,7 @@
 
 RickyCorte::Telegram::Update::Update(const std::string &data):
         is_valid{true}, chat_id{0}, message_id{0}, is_reply{false},
-        group_member_join{false} ,group_member_quit{false}, isInvoke{false}
+        group_member_join{false} ,group_member_quit{false}, isInvoke{false}, has_bot_name{false}
 {
     try
     {
@@ -29,7 +29,8 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
         group_member_join = from_json_nothrow(json,"message/new_chat_member",false);
         group_member_quit = from_json_nothrow(json,"message/left_chat_member",false);
 
-        isInvoke = std::regex_search(message,std::regex(TG_RGX_BOT_NAME));
+        has_bot_name = std::regex_search(message,std::regex(TG_RGX_BOT_NAME));
+        has_bot_name = std::regex_match(message, std::regex(TG_RGX_BOT_NAME)); //match completo
     }
     catch(...)
     {
@@ -107,4 +108,9 @@ std::string RickyCorte::Telegram::Update::makeTextReply(const std::string reply,
         j["reply_to_message_id"] = message_id;
 
     return j.dump();
+}
+
+bool RickyCorte::Telegram::Update::containsBotName() const
+{
+    return has_bot_name;
 }

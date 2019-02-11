@@ -28,12 +28,17 @@
 
 #define ML_INPUT_FILE "resources/dataset.json"
 #define ML_MODEL_FILE "resources/model.dat"
+#define ML_MIN_SCORE 0.5
 
-
-#define TG_REPLY_FILE "resources/telgram.json"
+#define TG_REPLY_FILE "resources/telegram.json"
 #define TG_MAX_MESSAGE_SIZE 256
 #define TG_RGX_BOT_NAME "\\b@shouko(chanbot)??\\b"
 #define TG_BOT_NAME "ShoukoChanBot"
+#define TG_INVOKE_TAG "ev_invoke"
+#define TG_USRJOIN_TAG "ev_join"
+#define TG_USRLEFT_TAG "ev_left"
+#define TG_TOOLONG_TAG "ev_long"
+#define TG_LOWSCORE_TAG "ev_lowscore"
 
 /* 2kbytes per request is a really huge limit! */
 #define MAX_HTTP_REQUEST_SIZE 16384

@@ -1,16 +1,123 @@
 {
   "train_data": [
     {
-      "tag": "test",
-      "phrases": ["A","B","C"]
+      "tag": "aiuto",
+      "phrases": [
+        "help",
+        "aiuto",
+        "help",
+        "dammi una mano"
+      ]
     },
     {
-      "tag": "shish",
-      "phrases": ["A","B","C"]
+      "tag": "insulto_leggero",
+      "phrases": [
+        "cattiva",
+        "sei cattiva",
+        "che cattiva",
+        "sei brutta",
+        "sei vecchia",
+        "sei grassa",
+        "sei antipatica",
+        "fai shifo"
+      ]
     },
     {
-      "tag": "kebab",
-      "phrases": ["A","B","C"]
+      "tag": "complimento",
+      "phrases": [
+        "sei bella",
+        "sei bellissima",
+        "ti amo",
+        "sei geniale",
+        "sei stupenda",
+        "sei favolosa"
+      ]
+    },
+    {
+      "tag": "saluto",
+      "phrases": [
+        "ciao",
+        "hey",
+        "buongiorno",
+        "giorno",
+        "sera",
+        "buona sera",
+        "oi",
+        "we",
+        "wela",
+        "cia"
+      ]
+    },
+    {
+      "tag": "insulto_grave",
+      "phrases": [
+        "troia",
+        "sei una troia",
+        "puttana",
+        "suca",
+        "succhiamelo",
+        "sei una merda",
+        "merda",
+        "lurida",
+        "sei una zoccola",
+        "troione da battaglia",
+        "pomipnara succhia cazzi",
+        "muori",
+        "crepa",
+        "suicidati",
+        "vaffanculo",
+        "ma fottiti",
+        "fottiti",
+        "sei una cagna"
+      ]
+    },
+    {
+      "tag": "grazie",
+      "phrases": [
+        "grazie",
+        "danke"
+      ]
+    },
+    {
+      "tag": "scusa",
+      "phrases": [
+        "scusa",
+        "perdonami",
+        "sorry",
+        "scus"
+      ]
+    },
+    {
+      "tag": "where",
+      "phrases": [
+        "dove vivi",
+        "dove abiti",
+        "dove ti trovi",
+        "dove sei"
+      ]
+    },
+    {
+      "tag": "who",
+      "phrases": [
+        "chi sei",
+        "chi"
+      ]
+    },
+    {
+      "tag": "parolacce",
+      "phrases": [
+        "cazzo",
+        "culo",
+        "merda",
+        "cagare",
+        "cazzata",
+        "cogliona",
+        "coglione",
+        "vai a cagare",
+        "stronza",
+        "stronzo",
+        "figa"
+      ]
     }
   ]
 }
