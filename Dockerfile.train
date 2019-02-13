@@ -1,0 +1,12 @@
+#
+# TRAIN ONLY IMAGE
+#
+# DON'T DEPLOY
+#
+FROM alpine
+ADD build/resources/dataset.json resources/dataset.json
+ADD build/NanaoChanBot NanaoChanBot
+RUN ./NanaoChanBot -t
+
+
+CMD ["./NanaoChanBot"]

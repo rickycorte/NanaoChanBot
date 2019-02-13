@@ -40,3 +40,5 @@
 #CMake
 cmake-build-debug
 *.dat
+
+build

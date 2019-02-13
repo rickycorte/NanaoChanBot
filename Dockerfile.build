@@ -1,0 +1,19 @@
+#
+# BUILD ONLY IMAGE!
+#
+# size not optimized for deploy
+#
+FROM alpine
+
+RUN apk --no-cache add cmake make gcc g++ libc-dev linux-headers
+
+WORKDIR NanaoChanBot
+ADD lib lib
+ADD src src
+ADD CMakeLists.txt CMakeLists.txt
+ADD resources resources
+
+RUN cmake . && make
+
+#RUN ./NanaoChanBot -t
+CMD ["./NanaoChanBot"]
