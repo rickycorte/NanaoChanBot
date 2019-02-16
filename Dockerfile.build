@@ -11,9 +11,9 @@ WORKDIR NanaoChanBot
 ADD lib lib
 ADD src src
 ADD CMakeLists.txt CMakeLists.txt
-ADD resources resources
+ADD resources/dataset.json resources/dataset.json
 
-RUN cmake . && make
+RUN cmake -DDOCKER=true . && make
 
 #RUN ./NanaoChanBot -t
 CMD ["./NanaoChanBot"]

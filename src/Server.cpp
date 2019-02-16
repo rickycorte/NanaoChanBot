@@ -56,7 +56,6 @@ namespace RickyCorte
     {
         _server_fd = bind_server_port(_server_port);
 
-        RC_INFO("Running http server on port: ", _server_port);
 
         struct epoll_event *events = (epoll_event *)calloc(EPOLL_MAX_EVENTS, sizeof(epoll_event));
 
@@ -73,6 +72,7 @@ namespace RickyCorte
             exit(5);
         }
 
+        RC_INFO("Running http server on port: ", _server_port);
 
         while (!_exit_loop)
         {
@@ -103,6 +103,7 @@ namespace RickyCorte
                 }
 
             }
+
         }
 
         free(events);
@@ -155,8 +156,10 @@ namespace RickyCorte
     int Server::accept_connection(int server_fd)
     {
         struct sockaddr in_addr;
-        socklen_t in_len;
+        socklen_t in_len = sizeof(in_addr);
 
+
+        RC_DEBUG("server sock: ", server_fd);
         int new_conn = accept4(server_fd, &in_addr, &in_len, SOCK_NONBLOCK);
 
         //print new connection informations
@@ -168,6 +171,7 @@ namespace RickyCorte
                 RC_INFO("Accepted connection ", new_conn, " from ", hbuf,":",sbuf);
             }
         }
+        else RC_DEBUG("Connection error: "," ", errno ," ", strerror(errno));
 
         return new_conn;
     }

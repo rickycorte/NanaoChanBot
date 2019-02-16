@@ -49,7 +49,11 @@ add_executable(NanaoChanBot
         src/telegram/Update.hpp
         )
 
-set(CMAKE_EXE_LINKER_FLAGS " -static")
+set(DOCKER false CACHE BOOLEAN "Build for docker container")
+
+if(${DOCKER})
+  set(CMAKE_EXE_LINKER_FLAGS " -static")
+endif()
 target_link_libraries(NanaoChanBot -static-libgcc -static-libstdc++)
 target_link_libraries(NanaoChanBot pthread ${CMAKE_SOURCE_DIR}/lib/mitie/mitielib/libmitie.a)
 add_dependencies(NanaoChanBot mitielib)
