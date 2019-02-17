@@ -257,9 +257,16 @@ namespace RickyCorte
 
 
             // check if valid and path is present
-            if(req.IsValid() && _api_endpoints.find(req.GetPath()) != _api_endpoints.end())
+            if(req.IsValid())
             {
-                req_string = _api_endpoints[req.GetPath()]->DispatchRequest(req).Dump();
+                if(_api_endpoints.find(req.GetPath()) != _api_endpoints.end())
+                {
+                    auto rep = _api_endpoints[req.GetPath()]->DispatchRequest(req);
+                    rep.SetHeader("Content-Type", "application/json");
+                    req_string = rep.Dump();
+                }
+                else
+                    req_string = Http::Reply(404, "Not found").Dump();
             }
             else
             {
