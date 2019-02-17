@@ -263,7 +263,7 @@ namespace RickyCorte
             }
             else
             {
-                req_string = Http::Reply(400, Http::Request::ErrorCodeToString(req.GetErrorCode())).Dump();
+                req_string = Http::Reply(400, Http::Request::ErrorCodeToString(req.GetErrorCode())+" "+ req.getErrorMessage()).Dump();
             }
         }
 

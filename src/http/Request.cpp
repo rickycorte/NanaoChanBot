@@ -33,6 +33,7 @@ namespace RickyCorte::Http
         if(!_request_string)
         {
             _error_code = HTTP_BUFFER_ERROR;
+            error_message = "Server is bury right now";
             return;
         }
         memcpy(_request_string, req_string, len);
@@ -48,6 +49,7 @@ namespace RickyCorte::Http
             if(_request_string[i] == '\0')                  // unexpected end of line in the middle of the request
             {
                 _error_code = HTTP_UNEXPECTED_TOKEN;
+                error_message = "Unexpected \\0 terminator";
                 clean_up();
                 return;
             }
@@ -66,6 +68,8 @@ namespace RickyCorte::Http
                 if(i + 2 > _request_size || i < 1 || _request_string[i - 1] != '\r')
                 {
                     _error_code = HTTP_FORMAT_ERROR;
+                    error_message = "Unexpected token before \\n: ";
+                    error_message += _request_string[i - 1];
                     clean_up();
                     return;
                 }
@@ -95,6 +99,7 @@ namespace RickyCorte::Http
                     else
                     {
                         _error_code = HTTP_BROKEN_OPTION;
+                        error_message = "Header option error, ':' not found";
                         clean_up();
                         return;                        // broken header option
                     }
@@ -118,6 +123,7 @@ namespace RickyCorte::Http
             if(!_body && strcmp(_body,"") != 0) // GET operations are not supposed to have a payload
             {
                 _error_code = HTTP_UNEXPECTED_PAYLOAD;
+                error_message = "GET method does not support a payload";
                 return;
             }
         }
@@ -192,6 +198,7 @@ namespace RickyCorte::Http
                 if(space_count > 2 )
                 {
                     _error_code = HTTP_BROKEN_HEADER;
+                    error_message = "HTTP, too many spaces";
                     return false;
                 }
             }
@@ -207,6 +214,7 @@ namespace RickyCorte::Http
         if(strcmp(protocol, "HTTP/1.1") != 0)
         {
             _error_code = HTTP_NOT_SUPPORTED_VERSION;
+            error_message = "Found version: "+ std::string(protocol);
             return false;
         }
 
@@ -217,6 +225,8 @@ namespace RickyCorte::Http
         else
         {
             _error_code = HTTP_METHOD_NOT_SUPPORTED;
+            error_message= line_start;
+            error_message +=" method is not supported";
             return false; // broken protocol
         }
 

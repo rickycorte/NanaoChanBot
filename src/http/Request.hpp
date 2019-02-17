@@ -117,6 +117,8 @@ namespace Http
          */
         static std::string ErrorCodeToString(int error_code);
 
+        std::string getErrorMessage() const { return  error_message; }
+
     private:
         /**
          * Parse first line of http header
@@ -140,6 +142,8 @@ namespace Http
         char *_body;
 
         int _error_code;
+
+        std::string error_message;
     };
 
 }
