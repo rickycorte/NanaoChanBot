@@ -159,7 +159,7 @@ namespace RickyCorte::Telegram
         // messaggio valdo?
         bool is_valid;
 
-        bool isInvoke, has_bot_name;
+        bool isInvoke, has_bot_name, is_long_message;
 
     };
 }

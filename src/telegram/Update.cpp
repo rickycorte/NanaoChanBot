@@ -9,7 +9,8 @@
 
 RickyCorte::Telegram::Update::Update(const std::string &data):
         is_valid{true}, chat_id{0}, message_id{0}, is_reply{false},
-        group_member_join{false} ,group_member_quit{false}, isInvoke{false}, has_bot_name{false}
+        group_member_join{false} ,group_member_quit{false}, isInvoke{false}, has_bot_name{false},
+        is_long_message {false}
 {
     try
     {
@@ -25,12 +26,12 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
         sender_username = from_json_nothrow<std::string>(json, "/message/from/username", "");
 
         std::string reply_sender =  from_json_nothrow<std::string>(json,"/message/reply_to_message/from/username", "");
-        is_reply = reply_sender == TG_BOT_NAME;
+        is_reply = reply_sender == getEnvStr("BOT_NAME", TG_BOT_NAME) ;
 
         group_member_join = from_json_nothrow(json,"/message/new_chat_member",false);
         group_member_quit = from_json_nothrow(json,"/message/left_chat_member",false);
 
-        std::regex rgx = std::regex(TG_RGX_BOT_NAME);
+        std::regex rgx = std::regex(getEnvStr("BOT_NAME_REGEX", TG_RGX_BOT_NAME));
         if(std::regex_search(message, rgx))
         {
             has_bot_name = true;
@@ -38,6 +39,8 @@ RickyCorte::Telegram::Update::Update(const std::string &data):
             trim(message);
             isInvoke = message.size() <= 0;
         }
+
+        is_long_message = message.size() > getEnvInt("BOT_MAX_MESSAGE_SIZE", TG_MAX_MESSAGE_SIZE);
 
     }
     catch(std::exception& e)
@@ -79,7 +82,7 @@ bool RickyCorte::Telegram::Update::GroupHasMemberQuit() const
 
 bool RickyCorte::Telegram::Update::isLongMessage() const
 {
-    return message.size() > TG_MAX_MESSAGE_SIZE;
+    return is_long_message;
 }
 
 bool RickyCorte::Telegram::Update::isReply() const

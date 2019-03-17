@@ -29,6 +29,7 @@
 #include "telegram/BotApi.hpp"
 
 #include "traier/MLTrainer.hpp"
+#include "common/Utility.h"
 
 
 void printHelp()
@@ -50,10 +51,9 @@ void startBot()
 {
     using namespace RickyCorte;
 
-
-    Server server;
-    server.AddApiInterface("/", new EchoApi());
-    server.AddApiInterface("/tgdev", new Telegram::BotApi());
+    Server server(Utility::getEnvInt("SERVER_PORT", DEFAULT_SERVER_PORT));
+    //server.AddApiInterface("/", new EchoApi());
+    server.AddApiInterface(Utility::getEnvStr("BOT_PATH","/tgdev"), new Telegram::BotApi());
     server.Run();
 }
 

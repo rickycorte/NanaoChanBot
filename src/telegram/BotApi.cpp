@@ -27,6 +27,10 @@ RickyCorte::Telegram::BotApi::BotApi()
         std::cout << "   " << tagstr[i]
             << " found replies: "<< Utility::bool_to_string(reply_container->HasTag(tagstr[i])) << std::endl;
     }
+
+    min_ml_score = Utility::getEnvDouble("ML_MIN_SCORE", ML_MIN_SCORE);
+    show_ml_score = Utility::getEnvStr("SHOW_ML_SCORE", "false") == "true";
+
 }
 
 RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::Http::Request &req)
@@ -34,6 +38,7 @@ RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::H
     std::string result = "";
     bool is_reply = false;
     bool error = false;
+    bool _vivid_reply = !(rd()% 5); // 1/5 of random actions
 
 
     Update *up = new Update(req.GetBody());
@@ -49,11 +54,6 @@ RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::H
                 text_tag = TG_INVOKE_TAG;
                 is_reply = true;
             }
-            else if (up->isLongMessage())
-            {
-                text_tag = TG_TOOLONG_TAG;
-                is_reply = true;
-            }
             else if (up->GroupHasNewMember())
             {
                 text_tag = TG_USRJOIN_TAG;
@@ -62,35 +62,48 @@ RickyCorte::Http::Reply RickyCorte::Telegram::BotApi::onPOST(const RickyCorte::H
             {
                 text_tag = TG_USRLEFT_TAG;
             }
-            else if (up->isPrivateChat() || up->isReply() || up->containsBotName())
+            else if (up->isPrivateChat() || up->isReply() || up->containsBotName() || _vivid_reply)
             {
-                //ml
-                RC_DEBUG("ML: "+ up->getMessage());
-
-                if(up->getMessage().size() < 1)
-                    text_tag = TG_LOWSCORE_TAG;
+                if (up->isLongMessage())
+                {
+                    text_tag = TG_TOOLONG_TAG;
+                    is_reply = true;
+                    if(_vivid_reply) text_score = 0; // evita di triggerare il testo lungo se non citata
+                }
                 else
-                    categorizer.predict(Utility::split_every(up->getMessage()), text_tag, text_score);
+                {
+                    //ml
+                    RC_DEBUG("ML: " + up->getMessage());
 
+                    if (up->getMessage().size() < 1)
+                        text_tag = TG_LOWSCORE_TAG;
+                    else
+                        categorizer.predict(Utility::split_every(up->getMessage()), text_tag, text_score);
+                }
             }
 
             if(text_tag != "no_reply")
             {
                 is_reply = !(rd() % 4);
 
-                if (text_score < ML_MIN_SCORE)
+                if (text_score < min_ml_score)
                     result = reply_container->GetReply(TG_LOWSCORE_TAG);
                 else
                     result = reply_container->GetReply(text_tag);
 
                 result = Utility::replace_string(result, "{u}", up->getSender());
-                result += "\n\nTag: " + text_tag + " Score: " + std::to_string(text_score);
+
+                if(show_ml_score)
+                    result += "\n\nTag: " + text_tag + " Score: " + std::to_string(text_score);
 
 
                 result = up->makeTextReply(result, is_reply);
             }
             else result = "ok";
 
+            //elimina le risposte senza senso nel caso di azione casuale
+            if(text_score < min_ml_score && _vivid_reply)
+                result = "ok";
 
         }
         else error = true;

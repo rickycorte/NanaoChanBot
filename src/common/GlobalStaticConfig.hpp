@@ -32,8 +32,8 @@
 
 #define TG_REPLY_FILE "resources/telegram.json"
 #define TG_MAX_MESSAGE_SIZE 256
-#define TG_RGX_BOT_NAME "\\b@?shouko(chanbot)?\\b"
-#define TG_BOT_NAME "ShoukoChanBot"
+#define TG_RGX_BOT_NAME "\\b@?nanao(chanbot)?\\b"
+#define TG_BOT_NAME "NanaoChanBot"
 #define TG_INVOKE_TAG "ev_invoke"
 #define TG_USRJOIN_TAG "ev_join"
 #define TG_USRLEFT_TAG "ev_left"

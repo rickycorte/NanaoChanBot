@@ -26,6 +26,9 @@ namespace RickyCorte::Telegram
         ReplyContainer* reply_container;
 
         std::random_device rd;
+
+        double min_ml_score;
+        bool show_ml_score;
     };
 
 

@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include <nlohmann/json.hpp>
+#include <stdlib.h>
 
 namespace Utility
 {
@@ -116,6 +117,34 @@ namespace Utility
             return default_value;
         }
 
+    }
+
+    inline std::string getEnvStr(const std::string& path, const std::string& default_val = "")
+    {
+        char *var = getenv(path.c_str());
+        if(!var) return default_val;
+
+        return std::string(var);
+    }
+
+    inline int getEnvInt(const std::string& path, int default_val = 0)
+    {
+        char *var = getenv(path.c_str());
+        if(!var) return default_val;
+
+        int val = atoi(var);
+
+        return val == 0 ? default_val : val;
+    }
+
+    inline double getEnvDouble(const std::string& path, double default_val = 0)
+    {
+        char *var = getenv(path.c_str());
+        if(!var) return default_val;
+
+        double val = atof(var);
+
+        return val == 0.0 ? default_val : val;
     }
 
 }
